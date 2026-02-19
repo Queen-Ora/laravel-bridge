@@ -1,9 +1,8 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Users, CalendarOff, Wallet, FileText,
   Settings, LogOut, Building2
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Tableau de bord' },
@@ -16,13 +15,6 @@ const navItems = [
 
 const AppSidebar = () => {
   const { pathname } = useLocation();
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login', { replace: true });
-  };
 
   return (
     <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-sidebar text-sidebar-foreground">
@@ -62,13 +54,13 @@ const AppSidebar = () => {
       <div className="border-t border-sidebar-border p-3">
         <div className="flex items-center gap-3 rounded-lg px-3 py-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sidebar-accent text-xs font-semibold text-sidebar-primary">
-            {user?.name?.slice(0, 2).toUpperCase() || 'AD'}
+            AD
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-sidebar-foreground truncate">{user?.name || 'Utilisateur'}</p>
-            <p className="text-[11px] text-sidebar-foreground/50">{user?.email || ''}</p>
+            <p className="text-sm font-medium text-sidebar-foreground truncate">Admin RH</p>
+            <p className="text-[11px] text-sidebar-foreground/50">admin@jmoney.com</p>
           </div>
-          <button onClick={handleLogout} className="text-sidebar-foreground/40 hover:text-sidebar-foreground transition-colors">
+          <button className="text-sidebar-foreground/40 hover:text-sidebar-foreground transition-colors">
             <LogOut className="h-4 w-4" />
           </button>
         </div>
